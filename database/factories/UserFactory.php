@@ -22,11 +22,14 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {   
+        $name=fake()->name();
+        $avatar='https://avatar.iran.liara.run/public/' . fake()->boolean()?'':''.'?name='.$name;
         return [
-            'name' => fake()->name(),
+            'name' => $name,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'avatar' => $avatar,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
